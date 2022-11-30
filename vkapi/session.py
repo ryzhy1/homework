@@ -2,7 +2,7 @@ import typing as tp
 
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from requests.packages.urllib3.util.retry import Retry  # type: ignore
 
 
 class Session:
@@ -42,15 +42,12 @@ class Session:
 
     def get(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
         full_url = f"{self._base_url}/{url}"
-        response = self._request_session.get(
-            url=full_url, params=kwargs, timeout=self._timeout
-        )
+        response = self._request_session.get(url=full_url, params=kwargs, timeout=self._timeout)
 
         return response
 
     def post(self, url: str, *args: tp.Any, **kwargs: tp.Any) -> requests.Response:
         full_url = f"{self._base_url}/{url}"
-        response = self._request_session.post(
-            url=full_url, data=kwargs, timeout=self._timeout
-        )
+        response = self._request_session.post(url=full_url, data=kwargs, timeout=self._timeout)
+
         return response
